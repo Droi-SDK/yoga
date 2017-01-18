@@ -52,7 +52,7 @@ android {
 				srcFile 'android/AndroidManifest.xml'
 			}
             res.srcDirs(['android/res'])
-            jniLibs.srcDir(['java/jni'])
+            jniLibs.srcDir(['android/libs'])
             java {
                 srcDirs = ["java"];
                 exclude 'jni'
