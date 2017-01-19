@@ -1,0 +1,82 @@
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.2.3'
+        classpath "com.android.tools.build:gradle-experimental:0.7.0-alpha4"
+    }
+}
+
+allprojects {
+    repositories {
+        mavenCentral()
+        jcenter()
+        flatDir {
+            dirs 'lib/soloader'
+        }
+    }
+}
+
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+apply plugin: 'com.android.library'
+
+version = "0.0.1"
+def buildTimeStamp = new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+    resourcePrefix "yoga"
+
+    defaultConfig {
+        buildConfigField "String", "buildTimeStamp", "\"$buildTimeStamp\""
+        minSdkVersion 14
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+        ndk {
+            abiFilters "armeabi","x86"
+        }
+    }
+
+    sourceSets {
+        main {
+            manifest {
+				srcFile 'android/AndroidManifest.xml'
+			}
+            res.srcDirs(['android/res'])
+            jniLibs.srcDir(['android/libs'])
+            java {
+                srcDirs = ["java"];
+                exclude 'jni'
+                exclude 'tests'
+                exclude '**/BUCK'
+            }
+        }
+    }
+
+    compileOptions.encoding = "UTF-8"
+    lintOptions {
+        abortOnError false
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+}
+
+dependencies {
+    compile 'org.slf4j:slf4j-api:1.7.12'
+    compile 'junit:junit:4.12'
+
+    compile files('lib/infer-annotations/infer-annotations-1.4.jar')
+    compile files('lib/jsr-305/jsr305.jar')
+    compile(name:'soloader-0.1.0',ext:'aar')
+}

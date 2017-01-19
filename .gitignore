@@ -60,3 +60,12 @@ Pods/
 # Carthage/Checkouts
 
 Carthage/Build
+
+
+# Gradle
+.gradle
+
+# IDEA
+.idea
+
+local.properties
