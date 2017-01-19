@@ -13,9 +13,6 @@ allprojects {
     repositories {
         mavenCentral()
         jcenter()
-        flatDir {
-            dirs 'lib/soloader'
-        }
     }
 }
 
@@ -73,10 +70,6 @@ android {
 }
 
 dependencies {
-    compile 'org.slf4j:slf4j-api:1.7.12'
-    compile 'junit:junit:4.12'
+    compile 'com.facebook.soloader:soloader:0.1.0'
 
-    compile files('lib/infer-annotations/infer-annotations-1.4.jar')
-    compile files('lib/jsr-305/jsr305.jar')
-    compile(name:'soloader-0.1.0',ext:'aar')
 }

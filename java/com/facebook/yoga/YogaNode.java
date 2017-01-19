@@ -9,7 +9,7 @@
 
 package com.facebook.yoga;
 
-import javax.annotation.Nullable;
+import android.support.annotation.Nullable;
 
 import java.util.List;
 import java.util.ArrayList;
